@@ -1,0 +1,39 @@
+<div>
+    <h3>codingDojo Wall</h3>
+    <h3>Welcome <%= @username %>! </h3>
+    <a href="/logout" data-method="post">Log Out</a>
+</div>
+<form action="/messages/new" method="post">
+    <h1>Post a Message</h1>
+    <input type="hidden" name="authenticity_token" value="VxLCoqvap2IdbFioGuFfTadt+I5jVDPKxwg+6/1wPZIXUHTPyQzAq6Bat6MXlSF9HYrxQN3aXSZWZqJPMf2HOw==" />
+    <textarea name="message[message]" rows="5" cols="80"></textarea>
+    <br>
+    <input type="submit" value="Post a message">
+</form>
+<% @messages.each do |message| %>
+    <div class="message">
+        <h4><%= message.user.username %></h4>
+        <h4><%= message.message %></h4>
+    </div>
+    <% message.comments.each do |comment|%>
+        <div class="comment">
+            <p><%= comment.user.username %></p>
+            <p><%= comment.comment %></p>
+        </div>
+    <% end %>
+    <br>
+    <form action="/comments/new/<%= message.id%>" method="post">
+    <h3>Post a comment</h3>
+    <input type="hidden" name="authenticity_token" value="VxLCoqvap2IdbFioGuFfTadt+I5jVDPKxwg+6/1wPZIXUHTPyQzAq6Bat6MXlSF9HYrxQN3aXSZWZqJPMf2HOw==" />
+    <textarea name="comment[comment]" rows="5" cols="80"></textarea>
+    <br>
+    <input type="submit" value="Post a comment">
+</form>
+<%end%>
+
+
+<% if @errors%>
+<% @errors.each do |error| %>
+    <%= error %>
+<%end%>
+<%end%>

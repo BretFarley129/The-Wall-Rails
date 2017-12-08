@@ -1,0 +1,12 @@
+<h1>SIGN IN</h1>
+<form action="/users/new" method="post">
+    <input type="hidden" name="authenticity_token" value="VxLCoqvap2IdbFioGuFfTadt+I5jVDPKxwg+6/1wPZIXUHTPyQzAq6Bat6MXlSF9HYrxQN3aXSZWZqJPMf2HOw==" />
+    Username: <input type="text" name="user[username]"
+    <br>
+    <input type="submit" value="Sign In">
+</form>
+<% if @errors%>
+    <% @errors.each do |error| %>
+        <%= error %>
+    <%end%>
+<%end%>
